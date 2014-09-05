@@ -17,7 +17,7 @@
 using namespace std;	//Simplifies the need of typing std::cout and other 
 						//standard libraries
 void parseFiles(vector<string> &files , string fileName){
-	ifstream masterFile(fileName), e_o_f;
+	ifstream masterFile(fileName);
 	
 	while (!masterFile){				/// Debugging while loop if user inputs an invalid file
 		cout << "Invalid File!\n Please enter another one: " << endl;	
@@ -42,10 +42,10 @@ void userInput(string &fileName){
 //Reports the total number of students represented in the files
 int numStudents(vector<string> files){	
 		ifstream masterFile(files[0]);			//Opens the first file from the vector of file names
-		istream_iterator<double> start(masterFile), end;	//creates an iterator for the file
+		istream_iterator<int> start(masterFile), end;	//creates an iterator for the file
 		int numberOfStudents = 0;
 		
-		for_each(start, end, [&](double s)	//for each loop goes through the iterator and increments
+		for_each(start, end, [&](int s)	//for each loop goes through the iterator and increments
 		{									// numberOfStudents depending on how many items are read in
 			numberOfStudents++;
 		});
@@ -62,12 +62,15 @@ void parseGrades(vector<string> files ,vector<vector<double>> &grades ,int numRo
 		for (auto &file : files){				//Range for loop goes through each file
 
 			ifstream masterFile(file);						//Opens file
-			istream_iterator<double> start(masterFile);		//Creates an iterator
-			for (int j = 0; j < i; j++){					//Increments the iterator depending on which 
-				start++;									//student we are currently on so we store the grades
-			}												//from the same row in each file in the same vector
-			tempColumns[temp] = *start;						//Stores it into the vector
-			temp++;
+
+			if (masterFile){
+				istream_iterator<double> start(masterFile);		//Creates an iterator
+				for (int j = 0; j < i; j++){					//Increments the iterator depending on which 
+					start++;									//student we are currently on so we store the grades
+				}												//from the same row in each file in the same vector
+				tempColumns[temp] = *start;						//Stores it into the vector
+				temp++;
+			}
 		}
 		
 		grades[i] = tempColumns;							//Stores the temp vector in the 2d vector
@@ -76,13 +79,13 @@ void parseGrades(vector<string> files ,vector<vector<double>> &grades ,int numRo
 // Function that prints out essentially the 2d vector of grades
 void printGrades(vector<vector<double>> grades){
 	int numStudents = 0;
-		
+	cout << "Student\t\tAverage" <<endl;
 	for (auto &student : grades){		//Goes through each student
 		numStudents++;	
-		cout << "Student " << numStudents << " Grades: ";
+		cout << numStudents ;
 
 		for (auto &grade : student){		//Prints out the students grade
-			cout << "\t" << grade << endl;
+			cout << "\t\t" << grade << endl;
 		}
 		cout << "\n" << endl;
 	}
@@ -129,11 +132,10 @@ int main()
 	finalGrades.resize(numRows, vector<double>(1, 0));
 
 	parseGrades(files, studentGrades, numRows, numColumns);
-	printGrades(studentGrades);
 	dropLowestScore(studentGrades);
 	
 	averageGrades(studentGrades, finalGrades);
-	//printGrades(finalGrades);
+	printGrades(finalGrades);
 
 	system("pause");
 	return 0;
