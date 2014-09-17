@@ -78,6 +78,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="..\..\..\..\..\Dropbox\movies.txt" />
+    <Text Include="..\..\..\..\..\Dropbox\reviews1.txt" />
+    <Text Include="..\..\..\..\..\Dropbox\reviews2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\Downloads\hw2main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
