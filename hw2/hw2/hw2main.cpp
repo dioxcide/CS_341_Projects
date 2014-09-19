@@ -98,7 +98,7 @@ template<typename Container, typename Container2>	//Template for generic contain
 void parseReviews(const string & filename, Container & movies, Container2 & userReviews){
 	ifstream masterFile(filename);	//Opens file
 	string line;
-
+	cout << "Running.";
 	while (getline(masterFile, line))	//Iterates through file
 	{
 		auto review = ParseReview(line);
@@ -116,7 +116,7 @@ void parseReviews(const string & filename, Container & movies, Container2 & user
 		if (movieIter != movies.end()){
 			movieIter->second.push_back(review.movieRating);	//Pushes rating into 2nd pair which is a vector double which contains all the reviews
 		}
-
+		cout << ".";
 	}
 									//Sorts the userReviews in descending order
 	sort(userReviews.begin(), userReviews.end(), [=](pair<int, int> a, pair<int, int> b){return a.second != b.second ? a.second > b.second : a.first < b.first; });
