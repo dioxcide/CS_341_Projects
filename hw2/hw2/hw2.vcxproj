@@ -83,7 +83,7 @@
     <Text Include="..\..\..\..\..\Dropbox\reviews2.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Downloads\hw2main.cpp" />
+    <ClCompile Include="hw2main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
