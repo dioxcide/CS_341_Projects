@@ -7,15 +7,14 @@
 // Homework 2
 //
 #include <sstream>
-#include <vector>
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <algorithm>
+#include <vector>
 #include <string>
 #include <numeric>
-#include <map>
 #include <iomanip>
+#include <map>
 
 using namespace std;
 //
@@ -70,6 +69,10 @@ public:
 		movieID = movie;
 		movieName = name;
 	}
+	Movie(){
+		movieID = 0;
+		movieName = "Null";
+	}
 };
 //
 // Parses one line of the movies file and returns a Movie object:
@@ -82,138 +85,135 @@ Movie ParseMovie(string line)
 	return Movie(movieID, movieName);
 }
 
-template<typename Vector>	//Template for generic type
-void parseMovie(const string &fileName, Vector & v){	//Parses all the movies in the movie file
+template<typename Map>	//Template for generic type
+void parseMovie(const string &fileName, Map & v){	//Parses all the movies in the movie file
 	ifstream masterFile(fileName);						//Opens file stream
 	string line;
-	
+
 	while (getline(masterFile, line))					//Iterates through file
 	{
 		auto movie = ParseMovie(line);
-		v.push_back(pair<Movie, vector<double> >(movie, vector<double>()));	//Pushes new movie onto vector
+		v[movie.movieID] = pair<Movie, vector<double>>(movie, vector<double>());
 	}
 }
 
-template<typename Container, typename Container2>	//Template for generic containers
-void parseReviews(const string & filename, Container & movies, Container2 & userReviews){
+void parseReviews(const string & filename, map<int, pair<Movie, vector<double>>> & movies, map<int, int> & userReviews){
 	ifstream masterFile(filename);	//Opens file
 	string line;
+	int temp = 0;
 	cout << "Running.";
-	while (getline(masterFile, line))	//Iterates through file
+
+	while (getline(masterFile, line))//Iterates through file
 	{
 		auto review = ParseReview(line);
-		auto reviewIter = find_if(userReviews.begin(), userReviews.end(), [=](pair<int, int> e){ return e.first == review.userID; });	//Determines if the user has already been added to the vector
-		
-		if (reviewIter != userReviews.end()){		//If the user has been added already increment 2nd pair to keep track of num reviews
-			reviewIter->second++;
-		}
-		else{
-			userReviews.push_back(pair<int, int>(review.userID, 1));		//If the user is not found then we push back a new pair into the vector
-		}
 
-		auto movieIter = find_if(movies.begin(), movies.end(), [=](pair<Movie, vector<double>> e){ return e.first.movieID == review.movieID; });	//Finds the specific movie that got reviewed
-		
-		if (movieIter != movies.end()){
-			movieIter->second.push_back(review.movieRating);	//Pushes rating into 2nd pair which is a vector double which contains all the reviews
-		}
-		cout << ".";
+		userReviews[review.userID]++; //Increments the amount of ratings each user has
+
+		movies[review.movieID].second.push_back(review.movieRating);	//Pushes all the ratings for each individual movie onto the vector
 	}
-									//Sorts the userReviews in descending order
-	sort(userReviews.begin(), userReviews.end(), [=](pair<int, int> a, pair<int, int> b){return a.second != b.second ? a.second > b.second : a.first < b.first; });
-
 }
-	//Stores the number of 1-5 star reviews for each movie as well as compute the averages
-void topTenMovies(vector<pair<Movie, vector<double>>> &v){
-	
+//Stores the number of 1-5 star reviews for each movie as well as compute the averages
+void topTenMovies(map<int, pair<Movie, vector<double>>> &v){
+	map<double, Movie> avgMap;
+
 	for (auto &vec : v){		//Goes through the vector of pairs
-		double accum = accumulate(vec.second.begin(), vec.second.end(), 0);		
-		accum /= vec.second.size();											//Find average of the 2nd pair i.e vector of doubles
-		
-		int one = count(vec.second.begin(),vec.second.end(),1);				//Counts how many 1,2,3,4,5 star reviews the movie has had
-		int two = count(vec.second.begin(), vec.second.end(), 2);
-		int three = count(vec.second.begin(), vec.second.end(), 3);
-		int four = count(vec.second.begin(), vec.second.end(), 4);
-		int five = count(vec.second.begin(), vec.second.end(), 5);
-		
-		vec.first.averageRate = accum;										//Saves the counts from earlier into the movie class
-		vec.first.five = five;
-		vec.first.four = four;
-		vec.first.three = three;
-		vec.first.two = two;
-		vec.first.one = one;
-		vec.first.totalReviews = vec.second.size();
+		double accum = accumulate(vec.second.second.begin(), vec.second.second.end(), 0);
+		accum /= vec.second.second.size();											//Find average of the 2nd pair i.e vector of doubles
+
+		vec.second.first.one = count(vec.second.second.begin(), vec.second.second.end(), 1);				//Counts how many 1,2,3,4,5 star reviews the movie has had
+		vec.second.first.two = count(vec.second.second.begin(), vec.second.second.end(), 2);
+		vec.second.first.three = count(vec.second.second.begin(), vec.second.second.end(), 3);
+		vec.second.first.four = count(vec.second.second.begin(), vec.second.second.end(), 4);
+		vec.second.first.five = count(vec.second.second.begin(), vec.second.second.end(), 5);
+
+		vec.second.first.averageRate = accum;										//Saves the counts from earlier into the movie class
+		vec.second.first.totalReviews = vec.second.second.size();
+
+		avgMap[vec.second.first.averageRate] = vec.second.first;	//Stores the key as the average rating and the value as the movieID
+	}															//With how maps work this will give us the top 10 movies at the bottom 
+	//Of the map so we can just iterate backwards to get the top 10 movies from the map
+	int i = 0;
+	cout << "\t          Top Ten Movies!\n\n\tMovie ID\t\tMovieName\t\tMovie Rating\n\n";
+
+	for (auto rit = avgMap.rbegin(); rit != avgMap.rend(); ++rit){	//Iterates backwards to get the top ten movies
+
+		if (i == 10){								//Breaks the while loop when we printed out all 10 movies
+			break;
+		}
+
+		cout << " " << setw(10) << rit->second.movieID << "\t";		//Printing movie info
+		cout << " " << setw(10) << rit->second.movieName << "\t";
+		cout << " " << setw(10) << rit->second.averageRate << "\t" << endl;
+		i++;
 	}
-				//Sorts the vector by average rating of each movie in descending order
-	sort(v.begin(), v.end(), [](pair<Movie, vector<double>> a, pair<Movie, vector<double>> b){return a.first.averageRate > b.first.averageRate; });
+
+	cout << endl << endl;
 }
+
 //Inifinte while loop prints out user specified movie info
-void specificMovie(const vector<pair<Movie, vector<double>>> &v){
+void specificMovie(const map<int, pair<Movie, vector<double>>> &v){
 	int option = -1;
+	cout << "Enter a movie ID you want info on: ";
 	cin >> option;
 	//Reads in the user input and prints out specific movie
-	while (option !=0){
-		auto avgIter = find_if(v.begin(), v.end(), [=](pair<Movie, vector<double>> e){return e.first.movieID == option; });
-		cout << "\t   Movie ID\t             MovieName\t         Movie Rating\n\n";
-		cout << "\t" << avgIter->first.movieID << "\t   " << avgIter->first.movieName << "\t    " << avgIter->first.averageRate << endl;
-		cout << "\t\t\tFive Stars: " << avgIter->first.five << endl;
-		cout << "\t\t\tFour Stars: " << avgIter->first.four << endl;
-		cout << "\t\t\tThree Stars: " << avgIter->first.three << endl;
-		cout << "\t\t\tTwo Stars: " << avgIter->first.two << endl;
-		cout << "\t\t\tOne Stars: " << avgIter->first.one << endl;
-		cout << endl;
+	while (option != 0){
+		if (option <= v.size() && option >= 1){
+			Movie avgIter = v.at(option).first;
+			cout << "\tMovie ID\t       MovieName\t         Movie Rating\n\n";
+			cout << "\t" << avgIter.movieID << "\t      " << avgIter.movieName << "\t       " << avgIter.averageRate << endl << endl;
+			cout << "\t\t\t   Five Stars: " << avgIter.five << endl;
+			cout << "\t\t\t   Four Stars: " << avgIter.four << endl;
+			cout << "\t\t\t   Three Stars: " << avgIter.three << endl;			//Printing Movie Info
+			cout << "\t\t\t   Two Stars: " << avgIter.two << endl;
+			cout << "\t\t\t   One Stars: " << avgIter.one << endl;
+			cout << endl;
+		}
+		else if (option < 0 || option > v.size()){								//Error checking in case the user inputs a negative number
+			cout << "Movie ID invalid! Please enter another one: ";
+		}
 		cin >> option;
 	}
 	cout << setw(30) << "Exiting" << endl;
 }
-//Prints top 10 reviewers
-void printReviews(const vector<pair<int, int>> & v){
+
+void topTenUsers(map<int, int> & userMap){
+	multimap<int, int> tempMap;				//Creates a multimap to take into account for users that have the same amount
+	//of reviews
+	for (auto user : userMap){
+		tempMap.insert(pair<int, int>(user.second, user.first));	//Goes through the map populating the new map with the key being
+	}															//Users amount of reviews and the value being the user ID
+
 	cout << "\t      Top 10 Reviewers!\n\tUser ID\t\tNumber of Reviews\n\n";
 
 	int i = 0;
-	for (auto & temp : v){
-		if (i < 10){
-			cout <<"\t"<< temp.first << "\t\t\t" << temp.second << endl;
-			
-		}
-		else{
+	for (auto rit = tempMap.rbegin(); rit != tempMap.rend(); ++rit){		//Iterates through the map in reverse
+
+		if (i == 10){														//Breaks the loop after the top 10 users
 			break;
 		}
-		i++;
-	}
-	cout << endl<<endl;
-}
-//Prints top 10 movies
-void printMovies(const vector<pair<Movie, vector<double>>> &v){
-	
-	int i = 0;
-	cout << "\t          Top Ten Movies!\n\n\tMovie ID\t\tMovieName\t\tMovie Rating\n\n";
-	for (auto & temp : v){
-		if (i == 10){
-			break;
-		}
-		cout << " " << setw(10) << temp.first.movieID << "\t";
-		cout << " " << setw(10) << temp.first.movieName << "\t";
-		cout << " " << setw(10) << temp.first.averageRate << "\t" << endl;
+		cout << "\t" << rit->second << "\t\t\t" << rit->first << endl;
+
 		i++;
 	}
 	cout << endl << endl;
 }
 
+//Main delcaration of general functions and files.
 int main(int argc, string *argv){
 	string f1 = "movies.txt";
-	string f2 = "reviews2.txt";
-	vector<pair<Movie,vector<double>>> movieRatings;
-	vector<pair<int, int>> userRatings;
+	string f2 = "reviews1.txt";
 
-	parseMovie<vector<pair<Movie, vector<double>>>>(f1, movieRatings);
-	parseReviews<vector<pair<Movie, vector<double>>>, vector<pair<int, int>>>(f2, movieRatings, userRatings);
-	
+	map<int, pair<Movie, vector<double>>> movieRatings;
+	map<int, int> userRatings;
+	map<double, Movie> avgMovieRate;
+
+	parseMovie<map<int, pair<Movie, vector<double>>>>(f1, movieRatings);
+	parseReviews(f2, movieRatings, userRatings);
+
 	topTenMovies(movieRatings);
-	
-	printMovies(movieRatings);
-	printReviews(userRatings);
-	
+	topTenUsers(userRatings);
+
 	specificMovie(movieRatings);
-	
+
 	system("pause");
 }
