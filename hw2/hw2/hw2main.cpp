@@ -114,7 +114,7 @@ void parseReviews(const string & filename, map<int, pair<Movie, vector<double>>>
 }
 //Stores the number of 1-5 star reviews for each movie as well as compute the averages
 void topTenMovies(map<int, pair<Movie, vector<double>>> &v){
-	map<double, Movie> avgMap;
+	multimap<double, Movie> avgMap;
 
 	for (auto &vec : v){		//Goes through the vector of pairs
 		double accum = accumulate(vec.second.second.begin(), vec.second.second.end(), 0);
@@ -129,11 +129,11 @@ void topTenMovies(map<int, pair<Movie, vector<double>>> &v){
 		vec.second.first.averageRate = accum;										//Saves the counts from earlier into the movie class
 		vec.second.first.totalReviews = vec.second.second.size();
 
-		avgMap[vec.second.first.averageRate] = vec.second.first;	//Stores the key as the average rating and the value as the movieID
+		avgMap.insert(pair<double,Movie>(vec.second.first.averageRate, vec.second.first));	//Stores the key as the average rating and the value as the movieID
 	}															//With how maps work this will give us the top 10 movies at the bottom 
 	//Of the map so we can just iterate backwards to get the top 10 movies from the map
 	int i = 0;
-	cout << "\t          Top Ten Movies!\n\n\tMovie ID\t\tMovieName\t\tMovie Rating\n\n";
+	cout << "\t\tTop Ten Movies!\n\nMovie ID\t\tMovieName\t\tMovie Rating\t\tTotal Reviews\n\n";
 
 	for (auto rit = avgMap.rbegin(); rit != avgMap.rend(); ++rit){	//Iterates backwards to get the top ten movies
 
@@ -141,9 +141,10 @@ void topTenMovies(map<int, pair<Movie, vector<double>>> &v){
 			break;
 		}
 
-		cout << " " << setw(10) << rit->second.movieID << "\t";		//Printing movie info
-		cout << " " << setw(10) << rit->second.movieName << "\t";
-		cout << " " << setw(10) << rit->second.averageRate << "\t" << endl;
+		cout << rit->second.movieID << "\t";		//Printing movie info
+		cout <<  rit->second.movieName << "\t\t";
+		cout << rit->second.averageRate << "\t     ";
+		cout << rit->second.totalReviews << "\t" << endl;
 		i++;
 	}
 
@@ -159,8 +160,8 @@ void specificMovie(const map<int, pair<Movie, vector<double>>> &v){
 	while (option != 0){
 		if (option <= v.size() && option >= 1){
 			Movie avgIter = v.at(option).first;
-			cout << "\tMovie ID\t       MovieName\t         Movie Rating\n\n";
-			cout << "\t" << avgIter.movieID << "\t      " << avgIter.movieName << "\t       " << avgIter.averageRate << endl << endl;
+			cout << "Movie ID\t       MovieName\t         Movie Rating\t      Total Reviews\n\n";
+			cout << avgIter.movieID << "\t      " << avgIter.movieName << "\t       " << avgIter.averageRate << "    "<<avgIter.totalReviews << endl << endl;
 			cout << "\t\t\t   Five Stars: " << avgIter.five << endl;
 			cout << "\t\t\t   Four Stars: " << avgIter.four << endl;
 			cout << "\t\t\t   Three Stars: " << avgIter.three << endl;			//Printing Movie Info
@@ -199,13 +200,15 @@ void topTenUsers(map<int, int> & userMap){
 }
 
 //Main delcaration of general functions and files.
-int main(int argc, string *argv){
-	string f1 = "movies.txt";
-	string f2 = "reviews1.txt";
+int main(int argc, char **argv){
+	string f1, f2;
+	cout << "Movie text file: ";
+	cin >> f1;
+	cout << "Review File Name: ";
+	cin >> f2;
 
 	map<int, pair<Movie, vector<double>>> movieRatings;
 	map<int, int> userRatings;
-	map<double, Movie> avgMovieRate;
 
 	parseMovie<map<int, pair<Movie, vector<double>>>>(f1, movieRatings);
 	parseReviews(f2, movieRatings, userRatings);
