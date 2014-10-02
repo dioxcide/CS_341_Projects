@@ -1,0 +1,8 @@
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw3\hw3\bin\Release\hw3.exe.config
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw3\hw3\bin\Release\hw3.XML
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw3\hw3\bin\Release\hw3.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw3\hw3\bin\Release\hw3.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw3\hw3\bin\Release\FSharp.Core.dll
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw3\hw3\bin\Release\FSharp.Core.xml
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw3\hw3\obj\Release\hw3.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw3\hw3\obj\Release\hw3.pdb
