@@ -1,0 +1,8 @@
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\CodingDay2\CodingDay2\bin\Debug\CodingDay2.exe.config
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\CodingDay2\CodingDay2\bin\Debug\CodingDay2.XML
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\CodingDay2\CodingDay2\bin\Debug\CodingDay2.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\CodingDay2\CodingDay2\bin\Debug\CodingDay2.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\CodingDay2\CodingDay2\bin\Debug\FSharp.Core.dll
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\CodingDay2\CodingDay2\bin\Debug\FSharp.Core.xml
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\CodingDay2\CodingDay2\obj\Debug\CodingDay2.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\CodingDay2\CodingDay2\obj\Debug\CodingDay2.pdb
