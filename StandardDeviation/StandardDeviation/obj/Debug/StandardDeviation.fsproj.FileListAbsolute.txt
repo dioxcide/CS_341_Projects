@@ -1,0 +1,8 @@
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\StandardDeviation\StandardDeviation\bin\Debug\StandardDeviation.exe.config
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\StandardDeviation\StandardDeviation\bin\Debug\StandardDeviation.XML
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\StandardDeviation\StandardDeviation\bin\Debug\StandardDeviation.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\StandardDeviation\StandardDeviation\bin\Debug\StandardDeviation.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\StandardDeviation\StandardDeviation\bin\Debug\FSharp.Core.dll
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\StandardDeviation\StandardDeviation\bin\Debug\FSharp.Core.xml
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\StandardDeviation\StandardDeviation\obj\Debug\StandardDeviation.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\StandardDeviation\StandardDeviation\obj\Debug\StandardDeviation.pdb

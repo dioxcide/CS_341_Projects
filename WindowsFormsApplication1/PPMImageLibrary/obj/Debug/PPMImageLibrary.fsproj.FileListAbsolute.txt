@@ -1,0 +1,7 @@
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageLibrary\bin\Debug\PPMImageLibrary.XML
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageLibrary\bin\Debug\PPMImageLibrary.dll
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageLibrary\bin\Debug\PPMImageLibrary.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageLibrary\bin\Debug\FSharp.Core.dll
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageLibrary\bin\Debug\FSharp.Core.xml
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageLibrary\obj\Debug\PPMImageLibrary.dll
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageLibrary\obj\Debug\PPMImageLibrary.pdb
