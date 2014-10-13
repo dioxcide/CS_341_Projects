@@ -12,3 +12,17 @@ C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImage
 C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageEditor\obj\Debug\PPMImageEditor.csproj.GenerateResource.Cache
 C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageEditor\obj\Debug\PPMImageEditor.exe
 C:\Users\Tony\Documents\GitHub\CS_341_Projects\WindowsFormsApplication1\PPMImageEditor\obj\Debug\PPMImageEditor.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\bin\Debug\PPMImageEditor.exe.config
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\obj\Debug\PPMImageEditor.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\obj\Debug\PPMImageEditor.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\bin\Debug\PPMImageEditor.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\bin\Debug\PPMImageEditor.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\bin\Debug\FSharp.Core.dll
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\bin\Debug\PPMImageLibrary.dll
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\bin\Debug\PPMImageLibrary.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\bin\Debug\PPMImageLibrary.xml
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\bin\Debug\FSharp.Core.xml
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\obj\Debug\PPMImageEditor.csprojResolveAssemblyReference.cache
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\obj\Debug\PPMImageEditor.Form1.resources
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\obj\Debug\PPMImageEditor.Properties.Resources.resources
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw4\PPMImageEditor\obj\Debug\PPMImageEditor.csproj.GenerateResource.Cache
