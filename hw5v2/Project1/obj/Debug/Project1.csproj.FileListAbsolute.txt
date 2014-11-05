@@ -1,0 +1,6 @@
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5v2\Project1\bin\Debug\Project1.exe.config
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5v2\Project1\bin\Debug\Project1.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5v2\Project1\bin\Debug\Project1.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5v2\Project1\obj\Debug\Project1.csprojResolveAssemblyReference.cache
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5v2\Project1\obj\Debug\Project1.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5v2\Project1\obj\Debug\Project1.pdb

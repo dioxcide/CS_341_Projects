@@ -1,0 +1,9 @@
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\bin\Debug\hw5.exe.config
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\bin\Debug\hw5.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\bin\Debug\hw5.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\obj\Debug\hw5.csprojResolveAssemblyReference.cache
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\obj\Debug\hw5.Form1.resources
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\obj\Debug\hw5.Properties.Resources.resources
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\obj\Debug\hw5.csproj.GenerateResource.Cache
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\obj\Debug\hw5.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\hw5\hw5\obj\Debug\hw5.pdb

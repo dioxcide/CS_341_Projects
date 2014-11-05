@@ -169,7 +169,7 @@ namespace PPMImageEditor
       bool newImageList;
 
       newImageList = PPMImageLibrary.WriteP3Image(
-        "swag",
+        "PhotoName",
         CurrentImage.Header.Width,
         CurrentImage.Header.Height,
         CurrentImage.Header.Depth,
@@ -283,21 +283,21 @@ namespace PPMImageEditor
       //
       // Perform transformation:
       //
-      //FSharpList<FSharpList<int>> newImageList;
-      //
-      //newImageList = PPMImageLibrary.TransformFirstRowWhite(
-      //  CurrentImage.Header.Width,
-      //  CurrentImage.Header.Height, 
-      //  CurrentImage.Header.Depth,
-      //  CurrentImage.ImageListData
-      //);
+      FSharpList<FSharpList<int>> newImageList;
+
+      newImageList = PPMImageLibrary.TransformFlipHorizontal(
+        CurrentImage.Header.Width,
+        CurrentImage.Header.Height,
+        CurrentImage.Header.Depth,
+        CurrentImage.ImageListData
+      );
 
       //
       // create a new PixelMap here on the client-side, which creates a new bitmap
       // we then display to the user:
       //
-      //CurrentImage = new PixelMap(newImageList);
-      //picImage.Image = CurrentImage.BitMap;
+      CurrentImage = new PixelMap(newImageList);
+      picImage.Image = CurrentImage.BitMap;
     }
 
 
@@ -321,21 +321,21 @@ namespace PPMImageEditor
       //
       // Perform transformation:
       //
-      //FSharpList<FSharpList<int>> newImageList;
-      //
-      //newImageList = PPMImageLibrary.TransformFirstRowWhite(
-      //  CurrentImage.Header.Width,
-      //  CurrentImage.Header.Height, 
-      //  CurrentImage.Header.Depth,
-      //  CurrentImage.ImageListData
-      //);
+      FSharpList<FSharpList<int>> newImageList;
+
+      newImageList = PPMImageLibrary.TransformFlipVertical(
+        CurrentImage.Header.Width,
+        CurrentImage.Header.Height,
+        CurrentImage.Header.Depth,
+        CurrentImage.ImageListData
+      );
 
       //
       // create a new PixelMap here on the client-side, which creates a new bitmap
       // we then display to the user:
       //
-      //CurrentImage = new PixelMap(newImageList);
-      //picImage.Image = CurrentImage.BitMap;
+      CurrentImage = new PixelMap(newImageList);
+      picImage.Image = CurrentImage.BitMap;
     }
 
 
@@ -359,21 +359,21 @@ namespace PPMImageEditor
       //
       // Perform transformation:
       //
-      //FSharpList<FSharpList<int>> newImageList;
-      //
-      //newImageList = PPMImageLibrary.TransformFirstRowWhite(
-      //  CurrentImage.Header.Width,
-      //  CurrentImage.Header.Height, 
-      //  CurrentImage.Header.Depth,
-      //  CurrentImage.ImageListData
-      //);
+      FSharpList<FSharpList<int>> newImageList;
+
+      newImageList = PPMImageLibrary.RotateRight90(
+        CurrentImage.Header.Width,
+        CurrentImage.Header.Height,
+        CurrentImage.Header.Depth,
+        CurrentImage.ImageListData
+      );
 
       //
       // create a new PixelMap here on the client-side, which creates a new bitmap
       // we then display to the user:
       //
-      //CurrentImage = new PixelMap(newImageList);
-      //picImage.Image = CurrentImage.BitMap;
+      CurrentImage = new PixelMap(newImageList);
+      picImage.Image = CurrentImage.BitMap;
     }
 
 
