@@ -1,0 +1,22 @@
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\bin\Debug\HW6.exe.config
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\bin\Debug\netflix.mdf
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\bin\Debug\netflix_log.ldf
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\bin\Debug\HW6.exe
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\bin\Debug\HW6.pdb
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\obj\Debug\HW6.csprojResolveAssemblyReference.cache
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\obj\Debug\HW6.Form1.resources
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\obj\Debug\HW6.Properties.Resources.resources
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\obj\Debug\HW6.csproj.GenerateResource.Cache
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\obj\Debug\HW6.exe
+c:\users\tony\documents\visual studio 2013\Projects\HW6\HW6\obj\Debug\HW6.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\bin\Debug\HW6.exe.config
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\obj\Debug\HW6.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\obj\Debug\HW6.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\bin\Debug\netflix.mdf
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\bin\Debug\netflix_log.ldf
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\bin\Debug\HW6.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\bin\Debug\HW6.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\obj\Debug\HW6.csprojResolveAssemblyReference.cache
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\obj\Debug\HW6.Form1.resources
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\obj\Debug\HW6.Properties.Resources.resources
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\HW6\HW6\obj\Debug\HW6.csproj.GenerateResource.Cache
