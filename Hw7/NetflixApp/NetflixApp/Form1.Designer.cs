@@ -50,6 +50,7 @@
             this.cmdTopMoviesByNumReviews = new System.Windows.Forms.Button();
             this.cmdTopMoviesByRating = new System.Windows.Forms.Button();
             this.txtTopN = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbarRating)).BeginInit();
             this.panel2.SuspendLayout();
@@ -65,6 +66,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(380, 412);
             this.listBox1.TabIndex = 0;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // cmdConnect
             // 
@@ -279,12 +281,23 @@
             this.txtTopN.Text = "10";
             this.txtTopN.TextChanged += new System.EventHandler(this.txtTopN_TextChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(217, 452);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(175, 40);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Display All Movies";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.ClientSize = new System.Drawing.Size(956, 561);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -336,6 +349,7 @@
     private System.Windows.Forms.TextBox txtTopN;
     private System.Windows.Forms.Button cmdTopUsers;
     private System.Windows.Forms.Button cmdTopMoviesByNumReviews;
+    private System.Windows.Forms.Button button1;
 	}
 }
 

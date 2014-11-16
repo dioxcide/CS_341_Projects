@@ -1,0 +1,9 @@
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\bin\Release\NetflixApp.exe.config
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\bin\Release\NetflixApp.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\bin\Release\NetflixApp.pdb
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\obj\Release\NetflixApp.csprojResolveAssemblyReference.cache
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\obj\Release\NetflixApp.Form1.resources
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\obj\Release\NetflixApp.Properties.Resources.resources
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\obj\Release\NetflixApp.csproj.GenerateResource.Cache
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\obj\Release\NetflixApp.exe
+C:\Users\Tony\Documents\GitHub\CS_341_Projects\Hw7\NetflixApp\NetflixApp\obj\Release\NetflixApp.pdb

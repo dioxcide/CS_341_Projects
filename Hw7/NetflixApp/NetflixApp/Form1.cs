@@ -57,7 +57,7 @@ namespace NetflixApp
 		{
 			listBox1.Items.Clear();
 
-            BusinessTier.Business BT = new BusinessTier.Business("netflix.mdf");
+            BusinessTier.Business BT = new BusinessTier.Business(this.txtFileName.Text);
             var movies = BT.GetMovie(System.Convert.ToInt32(this.txtMovieID.Text));
 
             if (movies == null)
@@ -82,7 +82,7 @@ namespace NetflixApp
 
             if (movies ==  null)
             {
-                listBox1.Items.Add("Failed To Movie");
+                listBox1.Items.Add("Failed To Find Movie");
             }
             else
             {
@@ -174,7 +174,8 @@ namespace NetflixApp
 			}
 			else
 			{
-				listBox1.Items.Add("** Insert Success?! **");
+				listBox1.Items.Add("** Insert Success! **");
+                listBox1.Items.Add("Movie ID: " + movie.MovieID.ToString());
 			}
 		}
 
@@ -191,7 +192,7 @@ namespace NetflixApp
 			listBox1.Items.Clear();
            
             BusinessTier.Business BT = new BusinessTier.Business("netflix.mdf");
-            var m1 = BT.GetMovie(this.txtRatingsMovieName.Text);
+            var m1 = BT.GetMovie(this.txtInsertMovieName.Text);
 
             if (m1 == null)
             {
@@ -199,8 +200,10 @@ namespace NetflixApp
             }
             else
             {
-                BT.AddReview(m1.MovieID, 1337, System.Convert.ToInt32(tbarRating.Value.ToString()));
+                System.Windows.Forms.MessageBox.Show("MovieID: "+m1.MovieID.ToString());
+                var rev = BT.AddReview(m1.MovieID, 1337, System.Convert.ToInt32(tbarRating.Value.ToString()));
                 listBox1.Items.Add("Review Added");
+                listBox1.Items.Add("Revied ID: " + rev.ReviewID);
             }
 		}
 
@@ -214,14 +217,15 @@ namespace NetflixApp
         BusinessTier.Business BT = new BusinessTier.Business("netflix.mdf");
         IReadOnlyList<BusinessTier.Movie> movies = BT.GetTopMoviesByAvgRating(System.Convert.ToInt32(txtTopN.Text));
 
-        if (movies.Count == 0)
+        if (movies == null)
         {
             listBox1.Items.Add("Failed To Display Top N Movies");
         }
         else
         {
+            System.Windows.Forms.MessageBox.Show("My message here");
             foreach(BusinessTier.Movie movie in movies){
-                var detail = BT.GetMovieDetail(movie.MovieID);
+                BusinessTier.MovieDetail detail = BT.GetMovieDetail(movie.MovieID);
                 this.listBox1.Items.Add(movie.MovieName);
                 this.listBox1.Items.Add(detail.AvgRating);
             }
@@ -238,7 +242,7 @@ namespace NetflixApp
       BusinessTier.Business BT = new BusinessTier.Business("netflix.mdf");
       IReadOnlyList<BusinessTier.Movie> movies = BT.GetTopMoviesByNumReviews(System.Convert.ToInt32(txtTopN.Text));
 
-      if (movies.Count == 0)
+      if (movies == null)
       {
           listBox1.Items.Add("Failed To Display Top N Movies");
       }
@@ -248,7 +252,7 @@ namespace NetflixApp
           {
               var detail = BT.GetMovieDetail(movie.MovieID);
               this.listBox1.Items.Add(movie.MovieName);
-              this.listBox1.Items.Add(detail.AvgRating);
+              this.listBox1.Items.Add(detail.NumReviews);
           }
       }
     }
@@ -263,7 +267,7 @@ namespace NetflixApp
       BusinessTier.Business BT = new BusinessTier.Business("netflix.mdf");
       IReadOnlyList<BusinessTier.User> users = BT.GetTopUsersByNumReviews(System.Convert.ToInt32(txtTopN.Text));
 
-      if (users.Count == 0)
+      if (users == null)
       {
           listBox1.Items.Add("Failed To Display Top N Movies");
       }
@@ -278,6 +282,18 @@ namespace NetflixApp
       }
     }
 
+    private void button1_Click(object sender, EventArgs e)
+    {
+        BusinessTier.Business BT = new BusinessTier.Business("netflix.mdf");
+        IReadOnlyList<BusinessTier.Movie> allMovies = BT.displayAllMovies();
+
+        listBox1.Items.Add("Movies".PadRight(20)+"ID");
+        foreach (var temp in allMovies)
+        {
+            listBox1.Items.Add(temp.MovieName+ "".PadRight(20) + temp.MovieID.ToString());
+        }
+    }
+
     private void txtInsertMovieName_TextChanged(object sender, EventArgs e)
     {
 
@@ -289,6 +305,11 @@ namespace NetflixApp
     }
 
     private void txtMovieID_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }
