@@ -40,7 +40,7 @@ namespace BusinessTier
     //
     public bool TestConnection()
     {
-      return datatier.TestConnection();
+      return datatier.TestConnection(); //Tests the connection
     }
 
 
@@ -53,9 +53,9 @@ namespace BusinessTier
     public Movie GetMovie(int MovieID)
     {
         var temp = datatier.ExecuteScalarQuery(string.Format("SELECT MovieName FROM Movies WHERE MovieID={0};",MovieID.ToString()));
-        if (temp != null)
+        if (temp != null)           //Testss to see if the movie is already in the database
         {
-            BusinessTier.Movie newMovie = new BusinessTier.Movie(MovieID, temp.ToString());
+            BusinessTier.Movie newMovie = new BusinessTier.Movie(MovieID, temp.ToString());     //Returns new movie
             return newMovie;
         }
         return null;
@@ -72,7 +72,8 @@ namespace BusinessTier
     {
         var quoteFix = MovieName.Replace("'", "''");
         var temp = datatier.ExecuteScalarQuery(string.Format("SELECT MovieID FROM Movies WHERE MovieName='{0}';", quoteFix));
-        if (temp != null)
+
+        if (temp != null)   //Tests to see if the movie is in the database or not
         {
             BusinessTier.Movie newMovie = new BusinessTier.Movie(System.Convert.ToInt32(temp), quoteFix);
             return newMovie;
@@ -91,11 +92,11 @@ namespace BusinessTier
         var quoteFix = MovieName.Replace("'", "''");
         var temp = datatier.ExecuteScalarQuery(string.Format("SELECT MovieName FROM Movies WHERE MovieName = '{0}'", quoteFix));
 
-        if (temp == null)
+        if (temp == null)//Tests to see if the movie is in the database already
         {
             var addedMovie = datatier.ExecuteActionQuery(string.Format("INSERT INTO Movies(MovieName) Values('{0}');", quoteFix));
             var movieID = datatier.ExecuteScalarQuery(string.Format("SELECT COUNT(MovieName) FROM Movies"));
-            BusinessTier.Movie newMovie = new BusinessTier.Movie(System.Convert.ToInt32(movieID), MovieName);
+            BusinessTier.Movie newMovie = new BusinessTier.Movie(System.Convert.ToInt32(movieID), MovieName);       //Returns a movie object of the new movie
             return newMovie;
         }
       
@@ -111,10 +112,11 @@ namespace BusinessTier
     //
     public Review AddReview(int MovieID, int UserID, int Rating)
     {
+        //Adds a new review to the database
         var temp = datatier.ExecuteActionQuery(string.Format("INSERT INTO Reviews(MovieID, UserID, Rating) Values({0}, {1}, {2});", MovieID, UserID, Rating));
         var reviewID = datatier.ExecuteScalarQuery(string.Format("SELECT COUNT(Rating) FROM Reviews"));
         BusinessTier.Review newReview = new BusinessTier.Review(System.Convert.ToInt32(reviewID), MovieID, UserID, Rating);
-        return newReview;
+        return newReview;           //Returns Review object
     }
 
 
@@ -128,10 +130,10 @@ namespace BusinessTier
     public MovieDetail GetMovieDetail(int MovieID)
     {
         BusinessTier.Movie currMovie = GetMovie(MovieID);
-
+        //Tests if the movie is in the database
         if (currMovie != null)
         {
-            string quoteReplacement = currMovie.MovieName.Replace("'", "''");
+            string quoteReplacement = currMovie.MovieName.Replace("'", "''");           //Finds the average number of ratings 
 
             var avgRating = datatier.ExecuteScalarQuery(string.Format(@"SELECT ROUND(AVG(CAST(Rating AS Float)), 2) AS AvgRating 
           FROM Reviews
@@ -140,22 +142,22 @@ namespace BusinessTier
 
             var numRatings = datatier.ExecuteScalarQuery(string.Format("SELECT COUNT(Rating) FROM Reviews WHERE MovieID = {0}", MovieID));
 
-            DataSet ds = datatier.ExecuteNonScalarQuery(string.Format(@"SELECT UserID, Rating, ReviewID
+            DataSet ds = datatier.ExecuteNonScalarQuery(string.Format(@"SELECT UserID, Rating, ReviewID    
             FROM Reviews 
             WHERE MovieID={0}
-            ORDER BY Rating Desc, UserID ASC;", MovieID));
+            ORDER BY Rating Desc, UserID ASC;", MovieID));//Retrieves data as a data set
 
-            DataTable dt = ds.Tables["TABLE"];
+            DataTable dt = ds.Tables["TABLE"];              //Converts dataset into datatable
             List<BusinessTier.Review> allReviews = new List<BusinessTier.Review>();
 
-            foreach (DataRow row in dt.Rows)
+            foreach (DataRow row in dt.Rows)            //Iterates through the table
             {
                 allReviews.Add(new BusinessTier.Review(System.Convert.ToInt32(row["ReviewID"]), MovieID, System.Convert.ToInt32(row["UserID"]), System.Convert.ToInt32(row["Rating"])));
             }
 
             BusinessTier.MovieDetail newMovieDetail = new BusinessTier.MovieDetail(currMovie, System.Convert.ToDouble(avgRating), System.Convert.ToInt32(numRatings), allReviews);
 
-            return newMovieDetail;
+            return newMovieDetail;              //Returns Moviedetail object
         }
         
         return null;
@@ -172,7 +174,7 @@ namespace BusinessTier
     public UserDetail GetUserDetail(int UserID)
     {
         BusinessTier.User currUser = new BusinessTier.User(UserID);
-    
+        //Computes individual user data as far as average rating and number of ratings
         var avgRating = datatier.ExecuteScalarQuery(string.Format(@"SELECT ROUND(AVG(CAST(Rating AS Float)), 2) FROM Reviews WHERE UserID = {0}", UserID));
 
         var numRatings = datatier.ExecuteScalarQuery(string.Format(@"SELECT COUNT(Rating) FROM Reviews WHERE UserID = {0}", UserID));
@@ -181,17 +183,17 @@ namespace BusinessTier
         DataSet ds = datatier.ExecuteNonScalarQuery(string.Format(@"SELECT MovieID, Rating, ReviewID
             FROM Reviews 
             WHERE UserID={0}
-            ORDER BY Rating Desc, UserID ASC;",UserID));
+            ORDER BY Rating Desc, UserID ASC;",UserID));        //Creates a dataset
         
-        DataTable dt = ds.Tables["TABLE"];
+        DataTable dt = ds.Tables["TABLE"];                  //Creates a datatable from the dataset
 
         foreach(DataRow row in dt.Rows){
-            allReviews.Add(new BusinessTier.Review(System.Convert.ToInt32(row["ReviewID"]), System.Convert.ToInt32(row[" MovieID"]), UserID, System.Convert.ToInt32(row["Rating"])));
+            allReviews.Add(new BusinessTier.Review(System.Convert.ToInt32(row["ReviewID"]), System.Convert.ToInt32(row["MovieID"]), UserID, System.Convert.ToInt32(row["Rating"])));
         }
 
         BusinessTier.UserDetail userDets = new BusinessTier.UserDetail(currUser, System.Convert.ToDouble(avgRating), System.Convert.ToInt32(numRatings), allReviews);
       
-        return userDets;
+        return userDets;        //Returns userdetail object
     }
 
 
@@ -207,6 +209,7 @@ namespace BusinessTier
       List<Movie> movies = new List<Movie>();
       var count = datatier.ExecuteScalarQuery(string.Format("SELECT COUNT(*) FROM Movies"));
 
+        //If the N input is between 1 and the max number of movies it will run the following
       if (N <= System.Convert.ToInt32(count) && N > 0)
       {
           DataSet ds = datatier.ExecuteNonScalarQuery(string.Format(@"SELECT TOP {0} Movies.MovieName, Movies.MovieID, g.AvgRating 
@@ -221,17 +224,17 @@ namespace BusinessTier
             ORDER BY g.AvgRating DESC, Movies.MovieName Asc;",
             N));
 
-          DataTable dt = ds.Tables["TABLE"];
+          DataTable dt = ds.Tables["TABLE"];        //Creates a datable of the top 10 movies
 
           foreach (DataRow row in dt.Rows)
           {
               BusinessTier.Movie temp = new BusinessTier.Movie(System.Convert.ToInt32(row["MovieID"]), row["MovieName"].ToString());
               movies.Add(temp);
           }
-
+          //Returns list of movie objects
           return movies;
       }
-      return null;
+      return null;      //Otherwise returns null
     }
 
 
@@ -247,7 +250,7 @@ namespace BusinessTier
       List<Movie> movies = new List<Movie>();
 
       var count = datatier.ExecuteScalarQuery(string.Format("SELECT COUNT(*) FROM Movies"));
-
+        //Error checking to see if the user entered something greater than 0 but less than or equal to the amount of movies in the database
       if (N <= System.Convert.ToInt32(count) && N > 0)
       {
           DataSet ds = datatier.ExecuteNonScalarQuery(string.Format(@"SELECT TOP {0} Movies.MovieName, Movies.MovieID, g.RatingCount 
@@ -262,17 +265,17 @@ namespace BusinessTier
             ORDER BY g.RatingCount DESC, Movies.MovieName Asc;",
             N));
 
-          DataTable dt = ds.Tables["TABLE"];
+          DataTable dt = ds.Tables["TABLE"];        //Creates a datatable
 
           foreach (DataRow row in dt.Rows)
           {
               BusinessTier.Movie temp = new BusinessTier.Movie(System.Convert.ToInt32(row["MovieID"]), row["MovieName"].ToString());
               movies.Add(temp);
           }
-
+          //Returns an list of movies
           return movies;
       }
-      return null;
+      return null;//Otherwise returns null
     }
 
 
@@ -289,6 +292,7 @@ namespace BusinessTier
 
       var count = datatier.ExecuteScalarQuery(string.Format("SELECT DISTINCT COUNT(UserID) FROM Reviews"));
 
+        //Error checking if the user entered an input between 1 and the maximum number of users
       if (N <= System.Convert.ToInt32(count) && N > 0)
       {
           DataSet ds = datatier.ExecuteNonScalarQuery(string.Format(@"SELECT TOP {0} UserID, COUNT(*) AS RatingCount
@@ -297,32 +301,32 @@ namespace BusinessTier
             ORDER BY RatingCount DESC, UserID Asc;",
             N));
 
-          DataTable dt = ds.Tables["TABLE"];
+          DataTable dt = ds.Tables["TABLE"];        //Creates a datatable of the top N users
 
           foreach (DataRow row in dt.Rows)
           {
               BusinessTier.User temp = new BusinessTier.User(System.Convert.ToInt32(row["UserID"]));
               users.Add(temp);
           }
-
+          //Returns a list of users
           return users;
       }
-      return null;
+      return null;  //Otherwise returns null
     }
 
     public IReadOnlyList<Movie> displayAllMovies()
-    {
+    {   
         List<Movie> allMovies = new List<Movie>();
-        DataSet ds = datatier.ExecuteNonScalarQuery(string.Format("SELECT * FROM Movies"));
+        DataSet ds = datatier.ExecuteNonScalarQuery(string.Format("SELECT * FROM Movies ORDER BY MovieName ASC;"));
 
-        DataTable dt = ds.Tables["TABLE"];
+        DataTable dt = ds.Tables["TABLE"];      //Creates a datatable of all the movies in the database
 
         foreach (DataRow row in dt.Rows)
         {
             Movie temp = new Movie(System.Convert.ToInt32(row["MovieID"]), row["MovieName"].ToString());
             allMovies.Add(temp);
         }
-        return allMovies;
+        return allMovies;               //Returns a list of movie objects
     }
 
   }//class

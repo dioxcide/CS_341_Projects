@@ -39,7 +39,7 @@ namespace DataAccessTier
       bool  state = false;
 
       try
-      {
+      {                         //Try catch statement testing out the connection to see if it fails or connects
         db.Open();
 
         state = (db.State == ConnectionState.Open);
@@ -63,13 +63,13 @@ namespace DataAccessTier
     public object ExecuteScalarQuery(string sql)
     {
         SqlConnection db = new SqlConnection(this._DBConnectionInfo);
-        SqlCommand cmd = new SqlCommand();
+        SqlCommand cmd = new SqlCommand();              //Sets up the connection to the database
 
         db.Open();
         cmd.Connection = db;
         cmd.CommandText = sql;
 
-        object result = cmd.ExecuteScalar();
+        object result = cmd.ExecuteScalar();        //Executes the scalar command
         db.Close();
       
       return result;
@@ -83,17 +83,17 @@ namespace DataAccessTier
     {
         SqlConnection db;
 
-        db = new SqlConnection(this._DBConnectionInfo);
+        db = new SqlConnection(this._DBConnectionInfo);         ///Sets up the connection to the server 
         db.Open();
 
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = db;
         cmd.CommandText = sql;
 
-        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+        SqlDataAdapter adapter = new SqlDataAdapter(cmd);       //Creates a data set out of the data
         DataSet ds = new DataSet();
 
-        adapter.Fill(ds);  // execute!
+        adapter.Fill(ds);  // execute!                  //Fills the table
 
         db.Close();
       
@@ -108,7 +108,7 @@ namespace DataAccessTier
     {
         SqlConnection db;
 
-        db = new SqlConnection(this._DBConnectionInfo);
+        db = new SqlConnection(this._DBConnectionInfo);         //Opens the connection to the database
         db.Open();
 
         SqlCommand cmd = new SqlCommand();
@@ -119,7 +119,7 @@ namespace DataAccessTier
         //
         cmd.CommandText = sql;
 
-        int temp = cmd.ExecuteNonQuery();
+        int temp = cmd.ExecuteNonQuery();               //Executes the action query
 
       return temp;
     }
