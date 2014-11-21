@@ -12,8 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-using System.Threading;
-
+using System.Threading.Tasks;
 
 namespace AsianOptions
 {
@@ -76,25 +75,28 @@ namespace AsianOptions
 			//
 			Random rand = new Random();
 			int start = System.Environment.TickCount;
+            Task<double> T1 = new Task<double>(() =>
+                {
+                    double price = AsianOptionsPricing.Simulation(rand, initial, exercise, up, down, interest, periods, sims);
+                    return price;
+                });
 
-            Thread T = new Thread(() =>
-            {
-                double price = AsianOptionsPricing.Simulation(rand, initial, exercise, up, down, interest, periods, sims);
+            var ui = TaskScheduler.FromCurrentSynchronizationContext();
 
-                Dispatcher.Invoke(() =>
-                    {
-                        int stop = System.Environment.TickCount;
 
-                        double elapsedTimeInSecs = (stop - start) / 1000.0;
+            Task T2 = T1.ContinueWith((parent) =>
+                {
+                    double price = parent.Result;
+                    int stop = System.Environment.TickCount;
 
-                        string result = string.Format("{0:C}  [{1:#,##0.00} secs]",
-                            price, elapsedTimeInSecs);
+                    double elapsedTimeInSecs = (stop - start) / 1000.0;
 
-                        //
-                        // Display the results:
-                        //
-                        this.lstPrices.Items.Insert(0, result);
+                    string result = string.Format("{0:C}  [{1:#,##0.00} secs]", price, elapsedTimeInSecs);
 
+                    //
+                    // Display the results:
+                    //
+                    this.lstPrices.Items.Insert(0, result);
                         count = System.Convert.ToInt32(this.lblCount.Content);
                         count--;
                         this.lblCount.Content = count.ToString();
@@ -104,9 +106,9 @@ namespace AsianOptions
                             this.spinnerWait.Spin = false;
                             this.spinnerWait.Visibility = System.Windows.Visibility.Collapsed;
                         }
-                    });
-            });
-            T.Start();
+                }, System.Threading.CancellationToken.None, TaskContinuationOptions.None, ui
+                );
+            T1.Start();
 		}
 
 	}//class
