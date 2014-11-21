@@ -355,6 +355,7 @@ namespace NetflixApp
         BusinessTier.Business BT = new BusinessTier.Business(this.txtFileName.Text);
         IReadOnlyList<BusinessTier.Movie> allMovies = BT.displayAllMovies();
 
+
         if (allMovies != null)
         {
             listBox1.Items.Add("Movies".PadRight(40) + "ID");
